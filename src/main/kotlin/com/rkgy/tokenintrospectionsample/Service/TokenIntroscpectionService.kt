@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 @Service
 class TokenIntroscpectionService @Autowired constructor(private val tokenIntrospectionRepository: TokenIntrospectionRepository) {
 
-    fun fetchTokenInfo() : ResponseEntity<String> {
-        val tokenInfo = tokenIntrospectionRepository.fetchTokenInfo()
-        return ResponseEntity.ok(tokenInfo.getJsonString())
+    fun fetchTokenInfo(token: String, tokenTypeHint: String) : ResponseEntity<String> {
+        val tokenInfo = tokenIntrospectionRepository.fetchTokenInfo(token)
+        return ResponseEntity.ok(tokenInfo.getJsonString() + " tokenTypeHint: " + tokenTypeHint)
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class TokenIntrospectionRepository {
 
-    fun fetchTokenInfo() : TokenInfo {
-        return TokenInfo()
+    fun fetchTokenInfo(token: String) : TokenInfo {
+        return TokenInfo(token)
     }
 }
