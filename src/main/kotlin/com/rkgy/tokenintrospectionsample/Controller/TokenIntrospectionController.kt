@@ -1,5 +1,6 @@
 package com.rkgy.tokenintrospectionsample.Controller
 
+import com.rkgy.tokenintrospectionsample.Entity.Response
 import com.rkgy.tokenintrospectionsample.Service.TokenIntroscpectionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -20,7 +21,7 @@ class TokenIntrospectionController @Autowired constructor(private val tokenIntro
             return ResponseEntity.badRequest().body("Content-Type " + contentType + " not supported")
         }
 
-        if (!authorizationHeader.contains(" ")) {
+        if (!authorizationHeader.contains(" ")) {                                                  
             return ResponseEntity.badRequest().body("Authorization Header is invalid")
         }
         
