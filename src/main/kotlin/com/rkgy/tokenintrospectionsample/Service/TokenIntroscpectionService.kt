@@ -2,7 +2,7 @@ package com.rkgy.tokenintrospectionsample.Service
 
 import com.google.gson.Gson
 import com.rkgy.tokenintrospectionsample.Entity.AccessToken
-import com.rkgy.tokenintrospectionsample.Entity.Response
+import com.rkgy.tokenintrospectionsample.Controller.Response.Response
 import com.rkgy.tokenintrospectionsample.Repository.TokenIntrospectionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -15,9 +15,11 @@ class TokenIntrospectionService @Autowired constructor(private val tokenIntrospe
         val token: AccessToken? = tokenIntrospectionRepository.fetch(token)
         token?.let {
             if (!it.isExepired()) {
-                return ResponseEntity.ok(Gson().toJson(Response(true)))
+                return ResponseEntity.ok(Gson().toJson(
+                        Response(true, it.getScope())
+                ))
             }
         }
-        return ResponseEntity.ok(Gson().toJson(Response(false)))
+        return ResponseEntity.ok(Gson().toJson(Response(false, null)))
     }
 }
