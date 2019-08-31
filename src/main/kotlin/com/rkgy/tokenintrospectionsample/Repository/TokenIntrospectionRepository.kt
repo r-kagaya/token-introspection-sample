@@ -7,9 +7,6 @@ import org.apache.ibatis.annotations.Select
 
 @Mapper
 interface TokenIntrospectionRepository {
-    @Select("SELECT * FROM AccessToken")
-    fun fetchAll(): List<AccessToken>
-
     @Select("SELECT * FROM AccessToken WHERE token = (#{token});")
     fun fetch(@Param("token") token: String) : AccessToken
 }
