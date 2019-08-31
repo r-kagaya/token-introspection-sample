@@ -13,7 +13,7 @@ class TokenIntrospectionController @Autowired constructor(private val tokenIntro
     fun index(
             @RequestHeader(name = "Content-Type", required = true) contentType: String,
             @RequestHeader(name = "Authorization", required = true) authorizationHeader: String,
-            @RequestParam(name = "token") token: String, 
+            @RequestParam(name = "token", required = true) token: String,
             @RequestParam(name = "tokenTypeHint", required = false) tokenTypeHint: String?): ResponseEntity<String> {
         
         if (!requestValidateService.valid(contentType, authorizationHeader, token, tokenTypeHint ?: "")) {
