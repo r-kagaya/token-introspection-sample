@@ -9,13 +9,15 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class TokenIntroscpectionService @Autowired constructor(private val tokenIntrospectionRepository: TokenIntrospectionRepository) {
+class TokenIntrospectionService @Autowired constructor(private val tokenIntrospectionRepository: TokenIntrospectionRepository) {
 
     fun fetchTokenInfo(token: String, tokenTypeHint: String) : ResponseEntity<String> {
-        val token: AccessToken = tokenIntrospectionRepository.fetch(token)
-        if (token == null || token.isExepired()) {
-            return ResponseEntity.ok(Gson().toJson(Response(false)))
+        val token: AccessToken? = tokenIntrospectionRepository.fetch(token)
+        token?.let {
+            if (!it.isExepired()) {
+                return ResponseEntity.ok(Gson().toJson(Response(true)))
+            }
         }
-        return ResponseEntity.ok(Gson().toJson(Response(true)))
+        return ResponseEntity.ok(Gson().toJson(Response(false)))
     }
 }
