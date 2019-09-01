@@ -9,6 +9,7 @@ class RequestValidateService {
     fun valid(contentType: String, authorizationHeader: String, token: String, tokenTypeHint: String) {
         validateContentType(contentType)
         validateAuthorizationHeader(authorizationHeader)
+        validateTokenTypeHint(tokenTypeHint)
     }
     
     private fun validateContentType(contentType: String) {
@@ -25,6 +26,16 @@ class RequestValidateService {
 
         if (authorizationType != "Basic" || authorizationValue.isEmpty()) {
             throw BadRequestException("Authorization Header is invalid")
+        }
+    }
+
+    private fun validateTokenTypeHint(tokenTypeHint: String) {
+        if (tokenTypeHint.isEmpty()) {
+            return
+        }
+
+        if (tokenTypeHint != "access_token" && tokenTypeHint != "refresh_token") {
+            throw BadRequestException("TokenTypeHint is invalid")
         }
     }
 }
