@@ -1,3 +1,3 @@
 package com.rkgy.tokenintrospectionsample.Controller.Response
 
-data class Response constructor(private val isActive: Boolean, private val scope: List<String>?)
+data class Response constructor(private val active: Boolean, private val scope: String?)

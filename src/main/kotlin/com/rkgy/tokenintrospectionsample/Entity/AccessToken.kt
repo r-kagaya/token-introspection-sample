@@ -17,7 +17,7 @@ class AccessToken {
         return this.token
     }
 
-    fun getScope(): List<String> {
-        return this.scope.split(',')
+    fun getScope(): String {
+        return this.scope.replace(",", " ")
     }
 }
