@@ -1,5 +1,6 @@
 package com.rkgy.tokenintrospectionsample.Controller
 
+import com.rkgy.tokenintrospectionsample.Service.ClientService
 import com.rkgy.tokenintrospectionsample.Service.RequestValidateService
 import com.rkgy.tokenintrospectionsample.Service.TokenIntrospectionService
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.*
 import java.lang.Exception
 
 @RestController
-class TokenIntrospectionController @Autowired constructor(private val tokenIntrospectionService: TokenIntrospectionService, private val requestValidateService: RequestValidateService) {
+class TokenIntrospectionController @Autowired constructor(
+        private val tokenIntrospectionService: TokenIntrospectionService,
+        private val requestValidateService: RequestValidateService,
+        private val clientService: ClientService) {
 
     @PostMapping("token/introspection")
     fun index(
@@ -18,6 +22,9 @@ class TokenIntrospectionController @Autowired constructor(private val tokenIntro
             @RequestParam(name = "tokenTypeHint", required = false) tokenTypeHint: String?): ResponseEntity<String> {
 
         requestValidateService.valid(contentType, authorizationHeader, token, tokenTypeHint ?: "")
+
+        clientService.validClient(authorizationHeader)
+
         return tokenIntrospectionService.fetchTokenInfo(token = token, tokenTypeHint = tokenTypeHint ?: "")
     }
 }
