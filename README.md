@@ -1,5 +1,5 @@
 # token-introspection-sample
-Sample implementation of token-introspection-api
+Sample implementation of token-introspection-api(in progress)　　
 https://tools.ietf.org/html/rfc7662
 
 ## How To Call
