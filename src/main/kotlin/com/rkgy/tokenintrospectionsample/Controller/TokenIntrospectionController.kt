@@ -22,9 +22,7 @@ class TokenIntrospectionController @Autowired constructor(
             @RequestParam(name = "tokenTypeHint", required = false) tokenTypeHint: String?): ResponseEntity<String> {
 
         requestValidateService.valid(contentType, authorizationHeader, token, tokenTypeHint ?: "")
-
         clientService.validClient(authorizationHeader)
-
         return tokenIntrospectionService.fetchTokenInfo(token = token, tokenTypeHint = tokenTypeHint ?: "")
     }
 }
