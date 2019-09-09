@@ -6,7 +6,6 @@ import com.rkgy.tokenintrospectionsample.Service.TokenIntrospectionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.lang.Exception
 
 @RestController
 class TokenIntrospectionController @Autowired constructor(
@@ -20,7 +19,7 @@ class TokenIntrospectionController @Autowired constructor(
             @RequestHeader(name = "Authorization", required = true) authorizationHeader: String,
             @RequestParam(name = "token", required = true) token: String,
             @RequestParam(name = "tokenTypeHint", required = false) tokenTypeHint: String?): ResponseEntity<String> {
-
+        
         requestValidateService.valid(contentType, authorizationHeader, token, tokenTypeHint ?: "")
         clientService.validClient(authorizationHeader)
         return tokenIntrospectionService.fetchTokenInfo(token = token, tokenTypeHint = tokenTypeHint ?: "")
