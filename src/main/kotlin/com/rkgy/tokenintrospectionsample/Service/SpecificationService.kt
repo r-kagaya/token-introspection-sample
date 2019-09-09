@@ -7,7 +7,7 @@ import com.rkgy.tokenintrospectionsample.Specification.TokenTypeSpecification
 import org.springframework.stereotype.Service
 
 @Service
-class RequestValidateService {
+class SpecificationService {
 
     fun valid(contentType: String, authorizationHeader: String, token: String, tokenTypeHint: String) {
         val param: Map<String, Any> = mapOf(
@@ -21,12 +21,6 @@ class RequestValidateService {
 
         if (!spec.isSatisfiedBy(param)) {
             throw BadRequestException("invalid request")
-        }
-    }
-    
-    private fun validateContentType(contentType: String) {
-        if (!contentType.contains("application/x-www-form-urlencoded")) {
-            throw BadRequestException("Content-Type $contentType not supported")
         }
     }
 }
