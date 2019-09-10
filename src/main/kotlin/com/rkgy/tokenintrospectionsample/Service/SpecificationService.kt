@@ -20,7 +20,7 @@ class SpecificationService {
                 .and(ContentTypeSpecification())
 
         if (!spec.isSatisfiedBy(param)) {
-            throw BadRequestException("invalid request")
+            throw BadRequestException("parameter is invalid")
         }
     }
 }
