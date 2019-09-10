@@ -16,7 +16,7 @@ class ClientService constructor(private val clientRepository: ClientRepository) 
         val client: Client? = clientRepository.fetch(clientId)
         client ?: throw BadRequestException("Invalid Client")
         if (client.getSecret() != secret) {
-            throw BadRequestException("Invalid Client")
+            throw BadRequestException("The client authentication was invalid")
         }
     }
 }
